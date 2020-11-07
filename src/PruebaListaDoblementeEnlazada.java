@@ -115,6 +115,30 @@ class ListaDoblementeEnlazada{
 			return -1;
 		}
 	}
+	public int eliminarElementoFinal() {
+		if (this.listaVacia()) {
+			return -1;
+		}else try{
+			Nodo nodoAnterior, nodoSiguiente;
+			nodoAnterior = nodoInicio;
+			nodoSiguiente = nodoInicio.getNodoSiguiente();
+			if (nodoSiguiente==null) {
+				int ret = nodoInicio.getDato();
+				nodoInicio=nodoFin=null;
+				return ret;
+			}else {
+				while(nodoSiguiente.getNodoSiguiente()!=null) {
+					nodoAnterior = nodoAnterior.getNodoSiguiente();
+					nodoSiguiente = nodoSiguiente.getNodoSiguiente();
+				}
+				int ret = nodoSiguiente.getDato();
+				nodoAnterior.setNodoSiguiente(null);
+				return ret;
+			}
+		}catch (Exception e) {
+			return -1;
+		}
+	}
 	
 	
 	public void mostrarElementos() {
@@ -151,6 +175,7 @@ public class PruebaListaDoblementeEnlazada {
 		lde.agregarElementoAlFinal(15);
 		lde.mostrarElementos();
 		lde.eliminarElementoInicio();
+		lde.eliminarElementoFinal();
 		lde.debug();
 
 	}
