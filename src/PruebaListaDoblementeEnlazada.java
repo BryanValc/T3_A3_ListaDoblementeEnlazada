@@ -160,7 +160,6 @@ class ListaDoblementeEnlazada{
 			if (nodoAnterior!=null&&nodoAnterior.getDato()==dato) {
 				int n = nodoAnterior.getDato();
 				nodoInicio=nodoAnterior.getNodoSiguiente();
-				nodoInicio.setNodoAnterior(null);
 				return n;
 				
 			}else {
@@ -189,6 +188,9 @@ class ListaDoblementeEnlazada{
 	
 	public void mostrarElementos() {
 		Nodo nodoActual = nodoInicio;
+		if (this.listaVacia()) {
+			System.out.println("Lista vacia");
+		}
 		while(nodoActual!=null){
 			System.out.print("<--["+nodoActual.getDato()+"]-->");
 			nodoActual=nodoActual.getNodoSiguiente();
@@ -212,20 +214,88 @@ public class PruebaListaDoblementeEnlazada {
 
 	public static void main(String[] args) {
 		
-		ListaDoblementeEnlazada lde = new ListaDoblementeEnlazada();
-		lde.agregarElementoAlInicio(11);
-		lde.agregarElementoAlInicio(10);
-		lde.agregarElementoAlFinal(12);
-		lde.agregarElementoAlFinal(13);
-		lde.agregarElementoAlFinal(14);
-		lde.agregarElementoAlFinal(15);
-		lde.mostrarElementos();
-		lde.eliminarElementoInicio();
-		lde.eliminarElementoFinal();
-		lde.eliminarElementoEspecifico(13);
-		lde.eliminarElementoEspecifico(14);
-		lde.mostrarElementos();
-		lde.debug();
+		ListaDoblementeEnlazada miListaEnlazada = new ListaDoblementeEnlazada();
+		
+		byte opc=0;
+		int dato,num;
+		
+		boolean salir=false;
+		boolean salir1=false;
+		
+		do {
+			System.out.println("1)Crear Lista\n2)Insertar elemento\n3)Eliminar elemento\n4)Mostrar elementos\n5)Salir");
+			opc = (byte) Validacion.validacionNatural();
+			switch (opc) {
+			case 1:
+				miListaEnlazada = new ListaDoblementeEnlazada();
+				System.out.println("Lista creada exitosamente");
+				break;
+			case 2:
+				do {
+					salir=false;
+					System.out.println("1)Inicio\n2)Final\n3)Salir");
+					opc = (byte) Validacion.validacionNatural();
+					
+					switch (opc) {
+					case 1:
+						System.out.println("Elemento(entero):");
+						dato = Validacion.validacionNatural();
+						miListaEnlazada.agregarElementoAlInicio(dato);
+						break;
+					case 2:
+						System.out.println("Elemento(entero):");
+						dato = Validacion.validacionNatural();
+						miListaEnlazada.agregarElementoAlFinal(dato);
+						break;
+					case 3:
+						salir=true;
+						break;
+					default:
+						System.out.println("Opcion no valida");
+						break;
+					}
+					
+				} while (!salir);
+				break;
+			case 3:
+				do {
+					salir=false;
+					System.out.println("1)Inicio\n2)Final\n3)Elemento especifico\n4)Salir");
+					opc = (byte) Validacion.validacionNatural();
+					switch (opc) {
+					case 1:
+						num=miListaEnlazada.eliminarElementoInicio();
+						System.out.println(num==-1?"Lista Vacia":num==-99999?"No se encontro el dato":num+" se eliminó correctamente");
+						break;
+					case 2:
+						num=miListaEnlazada.eliminarElementoFinal();
+						System.out.println(num==-1?"Lista Vacia":num==-99999?"No se encontro el dato":num+" se eliminó correctamente");
+						break;
+					case 3:
+						System.out.println("Elemento a eliminar:");
+						dato = Validacion.validacionNatural();
+						num=miListaEnlazada.eliminarElementoEspecifico(dato);
+						System.out.println(num==-1?"Lista Vacia":num==-99999?"No se encontro el dato":num+" se eliminó correctamente");
+						break;
+					case 4:
+						salir=true;
+						break;
+					default:
+						System.out.println("Opcion no valida");
+						break;
+					}
+				} while (!salir);
+				break;
+			case 4:
+				miListaEnlazada.mostrarElementos();
+				break;
+			case 5:
+				salir1=true;break;
+			default:
+				System.out.println("Opcion no valida");break;
+			}
+		} while (!salir1);
+		System.out.println("\nFin de ejecucion");
 
 	}
 
