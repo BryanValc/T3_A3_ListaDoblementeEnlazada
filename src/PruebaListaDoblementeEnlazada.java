@@ -172,7 +172,9 @@ class ListaDoblementeEnlazada{
 				if (nodoSiguiente!=null && nodoSiguiente.getDato()==dato) {
 					int n = nodoSiguiente.getDato();
 					nodoSiguiente = nodoSiguiente.getNodoSiguiente();
-					nodoSiguiente.setNodoAnterior(nodoAnterior);
+					if (nodoSiguiente!=null) {
+						nodoSiguiente.setNodoAnterior(nodoAnterior);
+					}
 					
 					nodoAnterior.setNodoSiguiente(nodoSiguiente);
 					
@@ -220,7 +222,9 @@ public class PruebaListaDoblementeEnlazada {
 		lde.mostrarElementos();
 		lde.eliminarElementoInicio();
 		lde.eliminarElementoFinal();
-		lde.eliminarElementoEspecifico(12);
+		lde.eliminarElementoEspecifico(13);
+		lde.eliminarElementoEspecifico(14);
+		lde.mostrarElementos();
 		lde.debug();
 
 	}
