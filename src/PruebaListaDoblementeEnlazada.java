@@ -102,6 +102,19 @@ class ListaDoblementeEnlazada{
 			nuevoNodo.setNodoAnterior(nodoActual);
 		}
 	}
+	public int eliminarElementoInicio() {
+		if (this.listaVacia()) {
+			return -1;
+		}else try{
+			Nodo nodoActual=nodoInicio;
+			int ret = nodoActual.getDato();
+			nodoInicio=nodoActual.getNodoSiguiente();
+			nodoInicio.setNodoAnterior(null);
+			return ret;
+		}catch (Exception e) {
+			return -1;
+		}
+	}
 	
 	
 	public void mostrarElementos() {
@@ -137,6 +150,7 @@ public class PruebaListaDoblementeEnlazada {
 		lde.agregarElementoAlFinal(14);
 		lde.agregarElementoAlFinal(15);
 		lde.mostrarElementos();
+		lde.eliminarElementoInicio();
 		lde.debug();
 
 	}
