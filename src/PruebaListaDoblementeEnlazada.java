@@ -88,10 +88,36 @@ class ListaDoblementeEnlazada{
 			this.nodoInicio = nuevoNodo;
 		}
 	}
+	public void agregarElementoAlFinal(int dato){
+		Nodo nuevoNodo=new Nodo(dato);
+		if (this.listaVacia()) {
+			this.agregarElementoAlInicio(dato);
+		}else {
+			Nodo nodoActual;
+			nodoActual = nodoInicio;
+			while(nodoActual.getNodoSiguiente()!=null){
+				nodoActual=nodoActual.getNodoSiguiente();
+			}
+			nodoActual.setNodoSiguiente(nuevoNodo);
+			nuevoNodo.setNodoAnterior(nodoActual);
+		}
+	}
+	
+	
 	public void mostrarElementos() {
 		Nodo nodoActual = nodoInicio;
 		while(nodoActual!=null){
 			System.out.print("<--["+nodoActual.getDato()+"]-->");
+			nodoActual=nodoActual.getNodoSiguiente();
+		}
+		System.out.println();
+	}
+	public void debug() {
+		Nodo nodoActual = nodoInicio;
+		while(nodoActual!=null){
+			if (nodoActual.getNodoAnterior()!=null) {
+				System.out.println(nodoActual.getNodoAnterior().getDato());
+			}
 			nodoActual=nodoActual.getNodoSiguiente();
 		}
 		System.out.println();
@@ -103,6 +129,15 @@ public class PruebaListaDoblementeEnlazada {
 
 	public static void main(String[] args) {
 		
+		ListaDoblementeEnlazada lde = new ListaDoblementeEnlazada();
+		lde.agregarElementoAlInicio(11);
+		lde.agregarElementoAlInicio(10);
+		lde.agregarElementoAlFinal(12);
+		lde.agregarElementoAlFinal(13);
+		lde.agregarElementoAlFinal(14);
+		lde.agregarElementoAlFinal(15);
+		lde.mostrarElementos();
+		lde.debug();
 
 	}
 
