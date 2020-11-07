@@ -160,6 +160,7 @@ class ListaDoblementeEnlazada{
 			if (nodoAnterior!=null&&nodoAnterior.getDato()==dato) {
 				int n = nodoAnterior.getDato();
 				nodoInicio=nodoAnterior.getNodoSiguiente();
+				nodoInicio.setNodoAnterior(null);
 				return n;
 				
 			}else {
