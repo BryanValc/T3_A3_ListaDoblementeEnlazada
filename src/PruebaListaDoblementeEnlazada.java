@@ -102,6 +102,7 @@ class ListaDoblementeEnlazada{
 			nuevoNodo.setNodoAnterior(nodoActual);
 		}
 	}
+	
 	public int eliminarElementoInicio() {
 		if (this.listaVacia()) {
 			return -1;
@@ -137,6 +138,49 @@ class ListaDoblementeEnlazada{
 			}
 		}catch (Exception e) {
 			return -1;
+		}
+	}
+	public int eliminarElementoEspecifico(int dato) {
+		if (nodoInicio==null) {
+			return -1;
+		}else if(nodoInicio==nodoFin&&nodoInicio.getDato()==dato){
+			System.out.println("encontrado en el primer NODO");
+			int n = nodoInicio.getDato();
+			nodoInicio=nodoInicio.getNodoSiguiente();
+			if (nodoInicio!=null) {
+				nodoInicio.setNodoAnterior(null);
+			}
+			nodoFin=nodoInicio;
+			return n;
+		}else {
+			Nodo nodoAnterior, nodoSiguiente;
+			nodoAnterior = nodoInicio;
+			nodoSiguiente = nodoInicio.getNodoSiguiente();
+			
+			if (nodoAnterior!=null&&nodoAnterior.getDato()==dato) {
+				int n = nodoAnterior.getDato();
+				nodoInicio=nodoAnterior.getNodoSiguiente();
+				nodoInicio.setNodoAnterior(null);
+				return n;
+				
+			}else {
+				while(nodoSiguiente!=null && nodoSiguiente.getDato()!=dato){
+					nodoAnterior = nodoAnterior.getNodoSiguiente();
+					nodoSiguiente = nodoSiguiente.getNodoSiguiente();
+				}
+				
+				if (nodoSiguiente!=null && nodoSiguiente.getDato()==dato) {
+					int n = nodoSiguiente.getDato();
+					nodoSiguiente = nodoSiguiente.getNodoSiguiente();
+					nodoSiguiente.setNodoAnterior(nodoAnterior);
+					
+					nodoAnterior.setNodoSiguiente(nodoSiguiente);
+					
+					return n;
+				}else {
+					return -99999;
+				}
+			}
 		}
 	}
 	
@@ -176,6 +220,7 @@ public class PruebaListaDoblementeEnlazada {
 		lde.mostrarElementos();
 		lde.eliminarElementoInicio();
 		lde.eliminarElementoFinal();
+		lde.eliminarElementoEspecifico(12);
 		lde.debug();
 
 	}
